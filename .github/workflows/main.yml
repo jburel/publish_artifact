@@ -25,11 +25,11 @@ jobs:
           mv build/docs/javadoc docs
           git add docs
           git commit -m "Generate Javadoc"
-      #- name: Push changes
-      #  uses: ad-m/github-push-action@v0.6.0
-      #  with:
-      #    github_token: ${{ secrets.GITHUB_TOKEN }}
-      #    force: 'true'
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: 'true'
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -47,11 +47,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/libs/*.jar
-          asset_name: artifact.jar
+          asset_path: build/libs/publish_artifact.jar
+          asset_name: publish_artifact.jar
           asset_content_type: application/java-archive
-      #- name: Upload artifacts
-      #  uses: actions/upload-artifact@v2
-      #  with:
-      #     path: "./build/libs/publish_artifact.jar"
-      #     name: "publish_artifact.jar"
