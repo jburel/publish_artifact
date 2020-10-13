@@ -47,8 +47,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/libs/*.jar
-          asset_name: artifact.jar
+          asset_path: build/libs/publish_artifact.jar
+          asset_name: publish_artifact.jar
           asset_content_type: application/java-archive
       #- name: Upload artifacts
       #  uses: actions/upload-artifact@v2
