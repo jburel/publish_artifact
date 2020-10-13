@@ -2,3 +2,14 @@ plugins {
     id "java-library"
     id "maven-publish"
 }
+repositories {
+    mavenLocal()
+    maven {
+      name = "GitHubPackages"
+      url = "https://github.com/jburel/publish_artifact"
+      credentials {
+        username = System.getenv("GITHUB_ACTOR")
+        password = System.getenv("GITHUB_TOKEN")
+      }
+    }
+}
