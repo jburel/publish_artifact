@@ -28,7 +28,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force: 'true'
       - name: Upload artifacts
-        uses: upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
            path: "./build/libs/publish_artifact.jar"
            name: "publish_artifact.jar"
