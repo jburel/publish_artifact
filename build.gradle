@@ -2,7 +2,21 @@ plugins {
     id "java-library"
     id "maven-publish"
 }
-repositories {
+
+group = "io.github.jburel"
+version = "0.0.9"
+sourceCompatibility = "1.8"
+
+publishing {
+  publications {
+    maven(MavenPublication) {
+      artifact("build/libs/publish_artifact-$version"+".jar") {
+        extension "jar"
+      }
+    }
+  }
+
+  repositories {
     mavenLocal()
     maven {
       name = "OSSRH"
@@ -12,4 +26,5 @@ repositories {
         password = System.getenv("MAVEN_PASSWORD")
       }
     }
+  }
 }
