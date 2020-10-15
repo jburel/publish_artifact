@@ -18,18 +18,23 @@ jobs:
           java-version: 1.8
       - name: Build javadoc with Gradle
         run: gradle build javadoc
-      - name: Commit doc files
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          mv build/docs/javadoc docs
-          git add docs
-          git commit -m "Generate Javadoc"
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force: 'true'
+      - name: Publish package
+        run: gradle publish
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+      #- name: Commit doc files
+      #  run: |
+      #    git config --local user.email "action@github.com"
+      #    git config --local user.name "GitHub Action"
+      #    mv build/docs/javadoc docs
+      #    git add docs
+      #    git commit -m "Generate Javadoc"
+      #- name: Push changes
+      #  uses: ad-m/github-push-action@v0.6.0
+      #  with:
+      #    github_token: ${{ secrets.GITHUB_TOKEN }}
+      #    force: 'true'
       #- name: Create Release
       #  id: create_release
       #  uses: actions/create-release@v1
